@@ -10,11 +10,13 @@ package crud_productos;
  */
 public abstract class Producto {
 
+    public int codigoProducto;
     public double precio;
     public int cantidadStock;
     public int cantidadPedida;
 
-    public Producto(double precio, int cantidadStock, int cantidadPedida) {
+    public Producto(int codigoProducto, double precio, int cantidadStock, int cantidadPedida) {
+	this.codigoProducto = codigoProducto;
 	this.precio = precio;
 	this.cantidadStock = cantidadStock;
 	this.cantidadPedida = cantidadPedida;
