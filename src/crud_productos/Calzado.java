@@ -14,19 +14,19 @@ public class Calzado extends Producto implements Ajustable{
     public int tamanio;
     private final int TAMANIO_ORIGINAL;
 
-    public Calzado(int codigoProducto, double precio, int cantidadStock, int cantidadPedida, Marca marca, int tamanio) {
-	super(codigoProducto, precio, cantidadStock, cantidadPedida);
+    public Calzado(double precio, int cantidadStock, int cantidadPedida, Marca marca, int tamanio) {
+	super(precio, cantidadStock, cantidadPedida);
 	this.marca = marca;
 	this.tamanio = tamanio;
 	this.TAMANIO_ORIGINAL = tamanio;
     }
 
-    public Calzado(int codigoProducto, double precio, int cantidadStock, int cantidadPedida, Marca marca) {
-	this(codigoProducto, precio, cantidadStock, cantidadPedida, marca, 40);
+    public Calzado(double precio, int cantidadStock, int cantidadPedida, Marca marca) {
+	this(precio, cantidadStock, cantidadPedida, marca, 40);
     }
 
-    public Calzado(int codigoProducto, double precio, int cantidadStock, int cantidadPedida) {
-	this(codigoProducto, precio, cantidadStock, cantidadPedida, Marca.ADIDAS, 40);
+    public Calzado(double precio, int cantidadStock, int cantidadPedida) {
+	this(precio, cantidadStock, cantidadPedida, Marca.ADIDAS, 40);
     }
 
     @Override

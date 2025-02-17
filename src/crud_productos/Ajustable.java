@@ -8,6 +8,6 @@ package crud_productos;
  *
  * @author usuario
  */
-public abstract interface Ajustable {
+public interface Ajustable {
     public void ajustar(int ajuste) throws AjusteImposibleException;
 }

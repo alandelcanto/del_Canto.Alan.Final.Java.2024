@@ -13,19 +13,19 @@ public class PrendaSuperior extends Producto implements Ajustable{
     public Tela tipoTela;
     final private TamanioPrendaSuperior TAMANIO_ORIGINAL;
 
-    public PrendaSuperior(int codigoProducto, double precio, int cantidadStock, int cantidadPedida, TamanioPrendaSuperior tamanio, Tela tipoTela) {
-	super(codigoProducto, precio, cantidadStock, cantidadPedida);
+    public PrendaSuperior(double precio, int cantidadStock, int cantidadPedida, TamanioPrendaSuperior tamanio, Tela tipoTela) {
+	super(precio, cantidadStock, cantidadPedida);
 	this.tamanio = tamanio;
 	this.TAMANIO_ORIGINAL = tamanio;
 	this.tipoTela = tipoTela;
     }
 
-    public PrendaSuperior(int codigoProducto, double precio, int cantidadStock, int cantidadPedida, TamanioPrendaSuperior tamanio) {
-	this(codigoProducto, precio, cantidadStock, cantidadPedida, tamanio, Tela.ALGODON);
+    public PrendaSuperior(double precio, int cantidadStock, int cantidadPedida, TamanioPrendaSuperior tamanio) {
+	this(precio, cantidadStock, cantidadPedida, tamanio, Tela.ALGODON);
     }
 
-    public PrendaSuperior(int codigoProducto, double precio, int cantidadStock, int cantidadPedida) {
-	this(codigoProducto, precio, cantidadStock, cantidadPedida, TamanioPrendaSuperior.M, Tela.ALGODON);
+    public PrendaSuperior(double precio, int cantidadStock, int cantidadPedida) {
+	this(precio, cantidadStock, cantidadPedida, TamanioPrendaSuperior.M, Tela.ALGODON);
     }
 
     @Override
