@@ -8,7 +8,7 @@ package crud_productos;
  *
  * @author usuario
  */
-public abstract class Producto {
+public abstract class Producto implements Comparable<Producto>{
 
     public double precio;
     public int cantidadStock;
@@ -47,4 +47,11 @@ public abstract class Producto {
 	    return this.precio * cantidadAVender;
 	}
     }
+
+    @Override
+    public int compareTo(Producto o) {
+	return Double.compare(this.precio, o.precio);
+    }
+    
+    
 }
