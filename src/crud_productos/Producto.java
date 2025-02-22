@@ -4,11 +4,13 @@
  */
 package crud_productos;
 
+import java.io.Serializable;
+
 /**
  *
  * @author usuario
  */
-public abstract class Producto implements Comparable<Producto>{
+public abstract class Producto implements Comparable<Producto>, Serializable{
 
     public double precio;
     public int cantidadStock;
