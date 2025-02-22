@@ -6,6 +6,8 @@ package crud_productos;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 /**
  *
@@ -60,4 +62,24 @@ public class Inventario<T> implements CRUD<T>, Iterable<T>, Iterator<T> {
 	return objeto;
     }
 
+    @Override
+    public void forEach(Consumer<? super T> action) {
+	Iterable.super.forEach(action);
+    }
+
+    public ArrayList<T> filtrar(ArrayList<T> lista, ArrayList<Predicate<? super T>> listaFiltros) {
+	if (listaFiltros.isEmpty()) {
+	    return lista;
+	} else {
+	    ArrayList<T> listaFiltrada = new ArrayList<>();
+	    for (T objeto : lista) {
+		if (listaFiltros.get(0).test(objeto)){
+		    listaFiltrada.add(objeto);
+		}
+	    }
+	    listaFiltros.remove(0);
+	    
+	    return this.filtrar(listaFiltrada, listaFiltros);
+	}
+    }
 }
