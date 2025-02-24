@@ -84,7 +84,10 @@ public class CrearObjetoControlador {
 	int cantidadStock = Integer.parseInt(elegirStock.getText());
 	int cantidadPedida = Integer.parseInt(elegirPedido.getText());
 	
-	
+	if (precio < 0 || cantidadStock < 0 || cantidadPedida < 0) {
+	    ControladorJFX.mostrarAlerta("Números Negativos", "Ingrese únicamente números positivos");
+	    return;
+	}
 	
 	if (tipoProducto == null) {
 	    ControladorJFX.mostrarAlerta("Tipo de Producto no Válido", "Seleccione un producto válido");
@@ -99,6 +102,10 @@ public class CrearObjetoControlador {
 	    }
 	    case "Calzado" -> {
 		int tamanio = Integer.parseInt(elegirTamanioCalzado.getText());
+		if (tamanio < 0) {
+		    ControladorJFX.mostrarAlerta("Números Negativos", "Ingrese únicamente números positivos");
+		    return;
+		}
 		Marca marca = elegirMarca.getValue();
 		Calzado producto = new Calzado(precio, cantidadStock, cantidadPedida, marca, tamanio);
 		confirmarDialogo(true, producto);
