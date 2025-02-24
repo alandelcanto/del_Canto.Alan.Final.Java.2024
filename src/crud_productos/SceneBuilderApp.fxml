@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<TitledPane collapsible="false" prefHeight="488.0" prefWidth="878.0" text="Inventario" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="crud_productos.ControladorJFX">
+   <content>
+      <HBox prefHeight="462.0" prefWidth="584.0">
+         <children>
+            <Accordion prefHeight="209.0" prefWidth="154.0">
+              <panes>
+                  <TitledPane layoutX="10.0" layoutY="10.0" text="Acciones de Comercio">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <Button fx:id="botonRealizarVenta" mnemonicParsing="false" onAction="#realizarVenta" prefHeight="25.0" prefWidth="134.0" text="Realizar Venta" />
+                                    <Button fx:id="botonRealizarPedido" mnemonicParsing="false" onAction="#realizarPedido" prefHeight="25.0" prefWidth="154.0" text="Realizar Pedido" />
+                                    <Button fx:id="botonAceptarPedido" mnemonicParsing="false" onAction="#aceptarPedido" prefHeight="25.0" prefWidth="210.0" text="Aceptar Pedido" />
+                                 </children>
+                              </VBox>
+                           </children></AnchorPane>
+                     </content>
+                  </TitledPane>
+                <TitledPane text="Acciones de CRUD">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <Button fx:id="botonAgregarObjeto" mnemonicParsing="false" onAction="#agregarObjeto" prefHeight="25.0" prefWidth="134.0" text="Agregar Objeto" />
+                                    <Button fx:id="botonActualizarObjeto" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#actualizarObjeto" prefHeight="25.0" prefWidth="134.0" text="Actualizar Objeto" />
+                                    <Button fx:id="botonEliminarObjeto" layoutX="10.0" layoutY="35.0" mnemonicParsing="false" onAction="#eliminarObjeto" prefHeight="25.0" prefWidth="134.0" text="Eliminar Objeto" />
+                                 </children>
+                              </VBox>
+                           </children></AnchorPane>
+                  </content>
+                </TitledPane>
+                <TitledPane text="Ordenamiento">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children></AnchorPane>
+                  </content>
+                </TitledPane>
+                <TitledPane text="Filtros">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children></AnchorPane>
+                  </content>
+                </TitledPane>
+                  <TitledPane text="Funciones">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children></AnchorPane>
+                     </content>
+                  </TitledPane>
+                  <TitledPane text="Archivos">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children></AnchorPane>
+                     </content>
+                  </TitledPane>
+              </panes>
+            </Accordion>
+            <ScrollPane prefHeight="442.0" prefWidth="704.0" vbarPolicy="ALWAYS">
+              <content>
+                <AnchorPane prefHeight="440.0" prefWidth="692.0">
+                     <children>
+                        <TableView fx:id="tablaObjetos" prefHeight="440.0" prefWidth="660.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <columns>
+                            <TableColumn fx:id="columnaTipoObjeto" editable="false" prefWidth="92.0" sortable="false" text="Tipo Objeto" />
+                            <TableColumn fx:id="columnaPrecio" editable="false" prefWidth="53.0" sortable="false" text="Precio" />
+                              <TableColumn fx:id="columnaStock" editable="false" prefWidth="39.0" sortable="false" text="Stock" />
+                              <TableColumn fx:id="columnaPedido" editable="false" prefWidth="45.0" sortable="false" text="Pedido" />
+                              <TableColumn fx:id="columnaTamañoPrendaSuperior" editable="false" prefWidth="38.0" sortable="false" text="Talla" />
+                              <TableColumn fx:id="columnaTela" editable="false" minWidth="0.0" prefWidth="65.0" sortable="false" text="Tela" />
+                              <TableColumn fx:id="columnaMarca" editable="false" prefWidth="76.0" sortable="false" text="Marca" />
+                              <TableColumn fx:id="columnaTamañoCalzado" editable="false" minWidth="0.0" prefWidth="104.0" sortable="false" text="Tamaño(Num)" />
+                              <TableColumn fx:id="columnaTipoAccesorio" editable="false" minWidth="0.0" prefWidth="106.0" sortable="false" text="Tipo" />
+                              <TableColumn fx:id="columnaColor" minWidth="0.0" prefWidth="61.0" text="Color" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
+         </children>
+      </HBox>
+   </content>
+</TitledPane>

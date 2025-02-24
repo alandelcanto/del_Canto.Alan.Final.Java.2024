@@ -24,14 +24,14 @@ public class Inventario<T> implements CRUD<T>, Iterable<T>, Iterator<T> {
     }
 
     @Override
-    public T leerObjeto(int id) {
-	return this.inventario.get(id);
-
+    public ArrayList<T> leerLista() {
+	return this.inventario;
     }
 
     @Override
     public void actualizarObjeto(T objeto, T objetoActualizado) {
-	objeto = objetoActualizado;
+	this.eliminarObjeto(objeto);
+	this.crearObjeto(objetoActualizado);
     }
 
     @Override
@@ -39,10 +39,7 @@ public class Inventario<T> implements CRUD<T>, Iterable<T>, Iterator<T> {
 	this.inventario.remove(objeto);
     }
 
-    @Override
-    public ArrayList<T> leerLista() {
-	return this.inventario;
-    }
+
 
     @Override
     public Iterator<T> iterator() {

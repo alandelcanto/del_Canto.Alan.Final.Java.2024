@@ -13,11 +13,10 @@ import java.util.ArrayList;
 public interface CRUD<T> {
     public void crearObjeto(T objeto);
     
-    public T leerObjeto(int id);
+    public ArrayList<T> leerLista();
     
     public void actualizarObjeto(T objeto, T objetoActualizado);
     
     public void eliminarObjeto(T objeto);
     
-    public ArrayList<T> leerLista();
 }
