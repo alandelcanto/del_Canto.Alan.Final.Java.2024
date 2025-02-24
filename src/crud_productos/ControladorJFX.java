@@ -1,9 +1,12 @@
 package crud_productos;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Optional;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -65,6 +68,15 @@ public class ControladorJFX {
 
     @FXML
     private Button botonEliminarObjeto;
+
+    @FXML
+    private Button botonFuncionAumento;
+
+    @FXML
+    private Button botonFuncionDescuento;
+
+    @FXML
+    private Button botonMantenerStock;
 
     @FXML
     private Button botonOrdenPedidoAsc;
@@ -219,9 +231,9 @@ public class ControladorJFX {
 		int valor = Integer.parseInt(resultado.get());
 		if (valor > 0 && modo == 1) {
 		    return valor;
-		} else if (modo == 0){
+		} else if (modo == 0) {
 		    return valor;
-		} else if (valor < 0 && modo == -1){
+		} else if (valor < 0 && modo == -1) {
 		    return valor;
 		} else {
 		    throw new Exception();
@@ -359,6 +371,59 @@ public class ControladorJFX {
 	} else {
 	    mostrarAlerta("Producto no Ajustable", "El Producto seleccionado no es ajustable");
 	}
+	actualizarTabla();
+    }
+
+    @FXML
+    void aumentarGlobal(ActionEvent event) {
+	int valor = pedirIntProductoSeleccionado("Seleccione un producto para aumentar a todos", "Ingrese el porcentaje de aumento", 1);
+
+	Consumer<Producto> consumer = (Producto producto) -> {
+	    double precioAumentado = producto.precio * (1 + (valor / 100.0));
+
+	    BigDecimal precioRedondeado = new BigDecimal(precioAumentado).setScale(2, RoundingMode.HALF_UP);
+
+	    producto.precio = precioRedondeado.doubleValue();
+
+	};
+
+	inventario.forEach(consumer);
+	actualizarTabla();
+    }
+
+    @FXML
+    void descuentoGlobal(ActionEvent event) {
+	int valor = pedirIntProductoSeleccionado("Seleccione un producto para descontar a todos", "Ingrese el porcentaje de descuento", 1);
+
+	if (valor > 100) {
+	    mostrarAlerta("Descuento Imposible", "El descuento seleccionado supera el 100%");
+	    return;
+	}
+
+	Consumer<Producto> consumer = (Producto producto) -> {
+	    double precioAumentado = producto.precio * (1 - (valor / 100.0));
+
+	    BigDecimal precioRedondeado = new BigDecimal(precioAumentado).setScale(2, RoundingMode.HALF_UP);
+
+	    producto.precio = precioRedondeado.doubleValue();
+
+	};
+
+	inventario.forEach(consumer);
+	actualizarTabla();
+    }
+
+    @FXML
+    void mantenerStock(ActionEvent event) {
+	int valor = pedirIntProductoSeleccionado("Seleccione un producto para mantener a todos", "Ingrese el nivel a mantener: Si la cantidad es menor, se piden más", 1);
+
+	Consumer<Producto> consumer = (Producto producto) -> {
+	    if (producto.cantidadPedida + producto.cantidadStock < valor) {
+		producto.realizarPedido(valor - (producto.cantidadPedida + producto.cantidadStock));
+	    }
+	};
+
+	inventario.forEach(consumer);
 	actualizarTabla();
     }
 
