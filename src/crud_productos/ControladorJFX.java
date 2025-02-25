@@ -324,13 +324,6 @@ public class ControladorJFX {
 	comboboxFiltroMarca.getItems().setAll(Marca.values());
 	comboboxFiltroTipoAccesorio.getItems().setAll(TipoAccesorio.values());
 
-	inventario.crearObjeto(new PrendaSuperior(950, 20, 30, TamanioPrendaSuperior.M, Tela.LINO));
-	inventario.crearObjeto(new PrendaSuperior(600, 40, 30, TamanioPrendaSuperior.S, Tela.ALGODON));
-	inventario.crearObjeto(new Calzado(500, 10, 20));
-	inventario.crearObjeto(new Calzado(900, 15, 20, Marca.CONVERSE, 43));
-	inventario.crearObjeto(new Accesorio(500, 10, 20));
-	inventario.crearObjeto(new Accesorio(900, 15, 20, "Rojo", TipoAccesorio.GORRA));
-
 	actualizarTabla();
     }
 
