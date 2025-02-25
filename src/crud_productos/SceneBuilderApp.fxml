@@ -155,7 +155,16 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <Button fx:id="botonCargarDat" mnemonicParsing="false" onAction="#cargarArchivoDat" prefHeight="25.0" prefWidth="130.0" text="Cargar (.dat)" />
+                                    <Button fx:id="botonGuardarDat" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#guardarArchivoDat" prefHeight="25.0" prefWidth="130.0" text="Guardar (.dat)" />
+                                    <Button fx:id="botonCargarJson" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#cargarArchivoJson" prefHeight="25.0" prefWidth="130.0" text="Cargar (.json)" />
+                                    <Button fx:id="botonGuardarJson" layoutX="10.0" layoutY="35.0" mnemonicParsing="false" onAction="#guardarArchivoJson" prefHeight="25.0" prefWidth="130.0" text="Guardar (.json)" />
+                                    <Button fx:id="botonCargarCsv" layoutX="10.0" layoutY="35.0" mnemonicParsing="false" onAction="#cargarArchivoCsv" prefHeight="25.0" prefWidth="130.0" text="Cargar (.csv)" />
+                                    <Button fx:id="botonGuardarCsv" layoutX="10.0" layoutY="60.0" mnemonicParsing="false" onAction="#guardarArchivoCsv" prefHeight="25.0" prefWidth="130.0" text="Guardar (.csv)" />
+                                    <Button fx:id="botonExportarTxt" layoutX="10.0" layoutY="85.0" mnemonicParsing="false" onAction="#exportarArchivoTxt" prefHeight="25.0" prefWidth="130.0" text="Exportar (.txt)" />
+                                 </children></VBox>
                            </children></AnchorPane>
                      </content>
                   </TitledPane>

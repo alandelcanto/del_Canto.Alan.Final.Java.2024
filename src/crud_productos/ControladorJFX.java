@@ -1,5 +1,6 @@
 package crud_productos;
 
+import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -23,6 +24,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class ControladorJFX {
@@ -30,6 +32,7 @@ public class ControladorJFX {
     public static Producto productoSeleccionado = null;
     public static Inventario<Producto> inventario = new Inventario<>();
     private static ArrayList<Predicate<? super Producto>> listaFiltros = new ArrayList<>();
+    private static String listaFiltrosString = "";
 
     public static void mostrarInfo(String titulo, String mensaje) {
 	Alert alert = new Alert(AlertType.INFORMATION);
@@ -68,7 +71,28 @@ public class ControladorJFX {
 
     @FXML
     private Button botonEliminarObjeto;
+    
+    @FXML
+    private Button botonCargarCsv;
 
+    @FXML
+    private Button botonCargarDat;
+
+    @FXML
+    private Button botonCargarJson;
+
+    @FXML
+    private Button botonExportarTxt;
+
+    @FXML
+    private Button botonGuardarCsv;
+
+    @FXML
+    private Button botonGuardarDat;
+
+    @FXML
+    private Button botonGuardarJson;
+    
     @FXML
     private Button botonFuncionAumento;
 
@@ -248,6 +272,7 @@ public class ControladorJFX {
 
     @FXML
     private void initialize() {
+	
 	columnaTipoObjeto.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getClass().getSimpleName()));
 	columnaPrecio.setCellValueFactory(cellData -> new javafx.beans.property.SimpleDoubleProperty(cellData.getValue().precio).asObject());
 	columnaStock.setCellValueFactory(cellData -> new javafx.beans.property.SimpleIntegerProperty(cellData.getValue().cantidadStock).asObject());
@@ -299,14 +324,12 @@ public class ControladorJFX {
 	comboboxFiltroMarca.getItems().setAll(Marca.values());
 	comboboxFiltroTipoAccesorio.getItems().setAll(TipoAccesorio.values());
 
-	for (int i = 0; i < 100; i++) {
-	    inventario.crearObjeto(new PrendaSuperior(950, 20, 30, TamanioPrendaSuperior.M, Tela.LINO));
-	    inventario.crearObjeto(new PrendaSuperior(600, 40, 30, TamanioPrendaSuperior.S, Tela.ALGODON));
-	    inventario.crearObjeto(new Calzado(500, 10, 20));
-	    inventario.crearObjeto(new Calzado(900, 15, 20, Marca.CONVERSE, 43));
-	    inventario.crearObjeto(new Accesorio(500, 10, 20));
-	    inventario.crearObjeto(new Accesorio(900, 15, 20, "Rojo", TipoAccesorio.GORRA));
-	}
+	inventario.crearObjeto(new PrendaSuperior(950, 20, 30, TamanioPrendaSuperior.M, Tela.LINO));
+	inventario.crearObjeto(new PrendaSuperior(600, 40, 30, TamanioPrendaSuperior.S, Tela.ALGODON));
+	inventario.crearObjeto(new Calzado(500, 10, 20));
+	inventario.crearObjeto(new Calzado(900, 15, 20, Marca.CONVERSE, 43));
+	inventario.crearObjeto(new Accesorio(500, 10, 20));
+	inventario.crearObjeto(new Accesorio(900, 15, 20, "Rojo", TipoAccesorio.GORRA));
 
 	actualizarTabla();
     }
@@ -429,62 +452,79 @@ public class ControladorJFX {
 
     @FXML
     void activarFiltros(ActionEvent event) {
+	listaFiltrosString = "";
 	listaFiltros.clear();
-
+	
+	StringBuilder sb = new StringBuilder();
+	
 	if (checkboxFiltroTipoObjeto.isSelected() && comboboxFiltroTipoObjeto.getValue() != null) {
 	    Predicate<Producto> filtroTipoObjeto = (objeto) -> objeto.getClass().getName().replace("crud_productos.", "").equals(comboboxFiltroTipoObjeto.getValue());
 	    listaFiltros.add(filtroTipoObjeto);
+	    sb.append("TipoObjeto = ").append(comboboxFiltroTipoObjeto.getValue()).append("\n");
 	}
 	if (checkboxFiltroPrecioMenor.isSelected() && verificarIntPositivo(textfieldFiltroPrecio.getText())) {
 	    Predicate<Producto> filtro = (objeto) -> objeto.precio < Integer.parseInt(textfieldFiltroPrecio.getText());
 	    listaFiltros.add(filtro);
+	    sb.append("Precio < ").append(Integer.parseInt(textfieldFiltroPrecio.getText())).append("\n");
 	}
 	if (checkboxFiltroPrecioMayor.isSelected() && verificarIntPositivo(textfieldFiltroPrecio.getText())) {
 	    Predicate<Producto> filtro = (objeto) -> objeto.precio > Integer.parseInt(textfieldFiltroPrecio.getText());
 	    listaFiltros.add(filtro);
+	    sb.append("Precio > ").append(Integer.parseInt(textfieldFiltroPrecio.getText())).append("\n");
 	}
 	if (checkboxFiltroStockMenor.isSelected() && verificarIntPositivo(textfieldFiltroStock.getText())) {
 	    Predicate<Producto> filtro = (objeto) -> objeto.cantidadStock < Integer.parseInt(textfieldFiltroStock.getText());
 	    listaFiltros.add(filtro);
+	    sb.append("Stock < ").append(Integer.parseInt(textfieldFiltroStock.getText())).append("\n");
 	}
 	if (checkboxFiltroStockMayor.isSelected() && verificarIntPositivo(textfieldFiltroStock.getText())) {
 	    Predicate<Producto> filtro = (objeto) -> objeto.cantidadStock > Integer.parseInt(textfieldFiltroStock.getText());
 	    listaFiltros.add(filtro);
+	    sb.append("Stock > ").append(Integer.parseInt(textfieldFiltroStock.getText())).append("\n");
 	}
 	if (checkboxFiltroPedidoMenor.isSelected() && verificarIntPositivo(textfieldFiltroPedido.getText())) {
 	    Predicate<Producto> filtro = (objeto) -> objeto.cantidadPedida < Integer.parseInt(textfieldFiltroPedido.getText());
 	    listaFiltros.add(filtro);
+	    sb.append("Pedido < ").append(Integer.parseInt(textfieldFiltroPedido.getText())).append("\n");
 	}
 	if (checkboxFiltroPedidoMayor.isSelected() && verificarIntPositivo(textfieldFiltroPedido.getText())) {
 	    Predicate<Producto> filtro = (objeto) -> objeto.cantidadPedida > Integer.parseInt(textfieldFiltroPedido.getText());
 	    listaFiltros.add(filtro);
+	    sb.append("Pedido > ").append(Integer.parseInt(textfieldFiltroPedido.getText())).append("\n");
 	}
 	if (checkboxFiltroTalla.isSelected() && comboboxFiltroTalla.getValue() != null) {
 	    Predicate<Producto> filtro = (objeto) -> objeto instanceof PrendaSuperior && ((PrendaSuperior) objeto).tamanio == comboboxFiltroTalla.getValue();
 	    listaFiltros.add(filtro);
+	    sb.append("Talla = ").append(comboboxFiltroTalla.getValue()).append("\n");
 	}
 	if (checkboxFiltroTela.isSelected() && comboboxFiltroTela.getValue() != null) {
 	    Predicate<Producto> filtro = (objeto) -> objeto instanceof PrendaSuperior && ((PrendaSuperior) objeto).tipoTela == comboboxFiltroTela.getValue();
 	    listaFiltros.add(filtro);
+	    sb.append("Tela = ").append(comboboxFiltroTela.getValue()).append("\n");
 	}
 	if (checkboxFiltroMarca.isSelected() && comboboxFiltroMarca.getValue() != null) {
 	    Predicate<Producto> filtro = (objeto) -> objeto instanceof Calzado && ((Calzado) objeto).marca == comboboxFiltroMarca.getValue();
 	    listaFiltros.add(filtro);
+	    sb.append("Marca = ").append(comboboxFiltroMarca.getValue()).append("\n");
 	}
 	if (checkboxFiltroTamanio.isSelected() && verificarIntPositivo(textfieldFiltroTamanio.getText())) {
 	    Predicate<Producto> filtro = (objeto) -> objeto instanceof Calzado && ((Calzado) objeto).tamanio == Integer.parseInt(textfieldFiltroTamanio.getText());
 	    listaFiltros.add(filtro);
+	    sb.append("Tamaño = ").append(textfieldFiltroTamanio.getText()).append("\n");
 	}
 	if (checkboxFiltroTipoAccesorio.isSelected() && comboboxFiltroTipoAccesorio.getValue() != null) {
 	    Predicate<Producto> filtro = (objeto) -> objeto instanceof Accesorio && ((Accesorio) objeto).tipo == comboboxFiltroTipoAccesorio.getValue();
 	    listaFiltros.add(filtro);
+	    sb.append("TipoAccesorio = ").append(comboboxFiltroTipoAccesorio.getValue()).append("\n");
 	}
 	if (checkboxFiltroColor.isSelected()) {
 	    Predicate<Producto> filtro = (objeto) -> objeto instanceof Accesorio && ((Accesorio) objeto).color.equals(textfieldFiltroColor.getText());
 	    listaFiltros.add(filtro);
+	    sb.append("Color = ").append(textfieldFiltroColor.getText()).append("\n");
 	}
 
 	actualizarTabla();
+	listaFiltrosString = sb.toString();
     }
 
     @FXML
@@ -566,6 +606,153 @@ public class ControladorJFX {
     void ordenarStockDesc(ActionEvent event) {
 	Collections.sort(inventario.leerLista(), Collections.reverseOrder(new ProductoStockComparator()));
 	actualizarTabla();
+    }
+    
+    @FXML
+    void cargarArchivoCsv(ActionEvent event) {
+	FileChooser fc = new FileChooser();
+	
+	FileChooser.ExtensionFilter csvFilter = new FileChooser.ExtensionFilter("Archivo CSV", "*.csv");
+	
+	fc.getExtensionFilters().add(csvFilter);
+	
+	File archivo = fc.showOpenDialog(botonCargarCsv.getScene().getWindow());
+	if (archivo == null) {
+	    return;
+	}
+	
+	try {
+	    inventario.inventario = Serializadora.deserializarCsv(archivo.getAbsolutePath());
+	} catch (IOException ex) {
+	    mostrarAlerta("Error al cargar archivo", "No se pudo cargar correctamente el archivo");
+	}
+	
+	actualizarTabla();
+    }
+
+    @FXML
+    void cargarArchivoDat(ActionEvent event) {
+	FileChooser fc = new FileChooser();
+	
+	FileChooser.ExtensionFilter datFilter = new FileChooser.ExtensionFilter("Archivo de datos", "*.dat");
+	
+	fc.getExtensionFilters().add(datFilter);
+	
+	File archivo = fc.showOpenDialog(botonCargarDat.getScene().getWindow());
+	if (archivo == null) {
+	    return;
+	}
+	
+	try {
+	    inventario.inventario = Serializadora.deserializar(archivo.getAbsolutePath());
+	} catch (IOException | ClassNotFoundException ex) {
+	    mostrarAlerta("Error al cargar archivo", "No se pudo cargar correctamente el archivo");
+	}
+	
+	actualizarTabla();
+    }
+
+    @FXML
+    void cargarArchivoJson(ActionEvent event) {
+	FileChooser fc = new FileChooser();
+	
+	FileChooser.ExtensionFilter jsonFilter = new FileChooser.ExtensionFilter("Archivo JSON", "*.json");
+	
+	fc.getExtensionFilters().add(jsonFilter);
+	
+	File archivo = fc.showOpenDialog(botonCargarJson.getScene().getWindow());
+	if (archivo == null) {
+	    return;
+	}
+	
+	try {
+	    inventario.inventario = Serializadora.deserializarJson(archivo.getAbsolutePath());
+	} catch (IOException ex) {
+	    mostrarAlerta("Error al cargar archivo", "No se pudo cargar correctamente el archivo");
+	}
+	
+	actualizarTabla();
+    }
+    
+    @FXML
+    void exportarArchivoTxt(ActionEvent event) {
+	FileChooser fc = new FileChooser();
+	
+	FileChooser.ExtensionFilter txtFilter = new FileChooser.ExtensionFilter("Archivo de texto", "*.txt");
+	
+	fc.getExtensionFilters().add(txtFilter);
+	
+	File archivo = fc.showSaveDialog(botonExportarTxt.getScene().getWindow());
+	if (archivo == null) {
+	    return;
+	}
+	
+	
+	try {
+	    Serializadora.exportarTxt(listaFiltrada, archivo.getAbsolutePath(), listaFiltrosString);
+	} catch (IOException ex) {
+	    mostrarAlerta("Error al exportar archivo", "No se pudo exportar correctamente el archivo");
+	}
+    }
+
+    @FXML
+    void guardarArchivoCsv(ActionEvent event) {
+	FileChooser fc = new FileChooser();
+	
+	FileChooser.ExtensionFilter csvFilter = new FileChooser.ExtensionFilter("Archivo CSV", "*.csv");
+	
+	fc.getExtensionFilters().add(csvFilter);
+	
+	File archivo = fc.showSaveDialog(botonGuardarCsv.getScene().getWindow());
+	if (archivo == null) {
+	    return;
+	}
+	
+	try {
+	    Serializadora.serializarCsv(inventario.leerLista(), archivo.getAbsolutePath());
+	} catch (IOException ex) {
+	    mostrarAlerta("Error al guardar archivo", "No se pudo guardar correctamente el archivo");
+	}
+    }
+
+    @FXML
+    void guardarArchivoDat(ActionEvent event) {
+	FileChooser fc = new FileChooser();
+	
+	FileChooser.ExtensionFilter datFilter = new FileChooser.ExtensionFilter("Archivo de datos", "*.dat");
+	
+	fc.getExtensionFilters().add(datFilter);
+	
+	File archivo = fc.showSaveDialog(botonGuardarDat.getScene().getWindow());
+	if (archivo == null) {
+	    return;
+	}
+	
+	try {
+	    Serializadora.serializar(inventario.leerLista(), archivo.getAbsolutePath());
+	} catch (IOException ex) {
+	    mostrarAlerta("Error al guardar archivo", "No se pudo guardar correctamente el archivo");
+	}
+    }
+
+    @FXML
+    void guardarArchivoJson(ActionEvent event) {
+	FileChooser fc = new FileChooser();
+	
+	FileChooser.ExtensionFilter jsonFilter = new FileChooser.ExtensionFilter("Archivo JSON", "*.json");
+	
+	fc.getExtensionFilters().add(jsonFilter);
+	
+	File archivo = fc.showSaveDialog(botonGuardarJson.getScene().getWindow());
+	if (archivo == null) {
+	    return;
+	}
+	
+	try {
+	    Serializadora.serializarJson(inventario.leerLista(), archivo.getAbsolutePath());
+	} catch (IOException ex) {
+	    mostrarAlerta("Error al guardar archivo", "No se pudo guardar correctamente el archivo");
+	}
     }
 
 }

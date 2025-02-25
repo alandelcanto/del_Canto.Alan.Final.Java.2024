@@ -12,8 +12,15 @@ public class Calzado extends Producto implements Ajustable{
 
     public Marca marca;
     public int tamanio;
-    private final int TAMANIO_ORIGINAL;
-
+    public final int TAMANIO_ORIGINAL;
+    
+    public Calzado(double precio, int cantidadStock, int cantidadPedida, Marca marca, int tamanio, int TAMANIO_ORIGINAL) { // Solo para deserializar
+	super(precio, cantidadStock, cantidadPedida);
+	this.marca = marca;
+	this.tamanio = tamanio;
+	this.TAMANIO_ORIGINAL = TAMANIO_ORIGINAL;
+    }
+    
     public Calzado(double precio, int cantidadStock, int cantidadPedida, Marca marca, int tamanio) {
 	super(precio, cantidadStock, cantidadPedida);
 	this.marca = marca;
@@ -39,6 +46,16 @@ public class Calzado extends Producto implements Ajustable{
 	} else {
 	    this.tamanio = this.tamanio + ajuste;
 	}
+    }
+
+    @Override
+    public String toString() {
+	StringBuilder sb = new StringBuilder();
+	sb.append(super.toString()).append(" - Tipo: ").append("Calzado")
+		.append(" - Tamaño: ").append(tamanio)
+		.append(" - Marca: ").append(marca);
+	
+	return sb.toString();
     }
     
     

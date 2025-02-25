@@ -11,8 +11,15 @@ package crud_productos;
 public class PrendaSuperior extends Producto implements Ajustable{
     public TamanioPrendaSuperior tamanio;
     public Tela tipoTela;
-    final private TamanioPrendaSuperior TAMANIO_ORIGINAL;
+    public final TamanioPrendaSuperior TAMANIO_ORIGINAL;
 
+    public PrendaSuperior(double precio, int cantidadStock, int cantidadPedida, TamanioPrendaSuperior tamanio, Tela tipoTela, TamanioPrendaSuperior TAMANIO_ORIGINAL) { // Solo para deserializar
+	super(precio, cantidadStock, cantidadPedida);
+	this.tamanio = tamanio;
+	this.TAMANIO_ORIGINAL = TAMANIO_ORIGINAL;
+	this.tipoTela = tipoTela;
+    }
+    
     public PrendaSuperior(double precio, int cantidadStock, int cantidadPedida, TamanioPrendaSuperior tamanio, Tela tipoTela) {
 	super(precio, cantidadStock, cantidadPedida);
 	this.tamanio = tamanio;
@@ -41,6 +48,16 @@ public class PrendaSuperior extends Producto implements Ajustable{
 	} else {
 	    this.tamanio = TamanioPrendaSuperior.values()[this.tamanio.ordinal() + ajuste];
 	}
+    }
+
+    @Override
+    public String toString() {
+	StringBuilder sb = new StringBuilder();
+	sb.append(super.toString()).append(" - Tipo: ").append("Prenda Superior")
+		.append(" - Tamaño: ").append(tamanio)
+		.append(" - Tela: ").append(tipoTela);
+	
+	return sb.toString();
     }
     
     

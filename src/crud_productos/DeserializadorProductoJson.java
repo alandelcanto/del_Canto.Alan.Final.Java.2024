@@ -24,17 +24,20 @@ public class DeserializadorProductoJson implements JsonDeserializer<Producto> {
 	int cantidadStock = jsonObject.get("cantidadStock").getAsInt();
 	int cantidadPedida = jsonObject.get("cantidadPedida").getAsInt();
 
-	if (jsonObject.has("tamanio")) {
+	if (jsonObject.has("tipoTela")) {
 	    TamanioPrendaSuperior tamanio = TamanioPrendaSuperior.valueOf(jsonObject.get("tamanio").getAsString());
 	    Tela tipoTela = Tela.valueOf(jsonObject.get("tipoTela").getAsString());
-	    return new PrendaSuperior(precio, cantidadStock, cantidadPedida, tamanio, tipoTela);
-	} else if (jsonObject.has("tamanioCalzado")) {
-	    int tamanio = jsonObject.get("tamanioCalzado").getAsInt();
+	    TamanioPrendaSuperior tamanioOriginal = TamanioPrendaSuperior.valueOf(jsonObject.get("TAMANIO_ORIGINAL").getAsString());
+	    return new PrendaSuperior(precio, cantidadStock, cantidadPedida, tamanio, tipoTela, tamanioOriginal);
+	} else if (jsonObject.has("tamanio")) {
+	    int tamanio = jsonObject.get("tamanio").getAsInt();
 	    Marca marca = Marca.valueOf(jsonObject.get("marca").getAsString());
-	    return new Calzado(precio, cantidadStock, cantidadPedida, marca, tamanio);
+	    int tamanioOriginal = jsonObject.get("TAMANIO_ORIGINAL").getAsInt();
+	    return new Calzado(precio, cantidadStock, cantidadPedida, marca, tamanio, tamanioOriginal);
 	} else if (jsonObject.has("color")) {
 	    String color = jsonObject.get("color").getAsString();
 	    TipoAccesorio tipo = TipoAccesorio.valueOf(jsonObject.get("tipo").getAsString());
+	    return new Accesorio(precio, cantidadStock, cantidadPedida, color, tipo);
 	}
 	return null;
     }

@@ -30,19 +30,19 @@ import org.apache.commons.csv.CSVRecord;
  */
 public class Serializadora {
 
-    Gson gson = new GsonBuilder()
+    public static Gson gson = new GsonBuilder()
 	    .registerTypeAdapter(Producto.class, new SerializadorProductoJson())
 	    .registerTypeAdapter(Producto.class, new DeserializadorProductoJson())
 	    .setPrettyPrinting()
 	    .create();
 
-    public void serializar(ArrayList<? extends Producto> lista, String path) throws IOException {
+    public static void serializar(ArrayList<? extends Producto> lista, String path) throws IOException {
 	try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(path))) {
 	    out.writeObject(lista);
 	}
     }
 
-    public ArrayList<Producto> deserializar(String path) throws IOException, ClassNotFoundException {
+    public static ArrayList<Producto> deserializar(String path) throws IOException, ClassNotFoundException {
 	try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(path))) {
 	    ArrayList<Producto> lista = (ArrayList<Producto>) in.readObject();
 
@@ -50,15 +50,15 @@ public class Serializadora {
 	}
     }
 
-    public void serializarJson(ArrayList<? extends Producto> lista, String path) throws IOException {
+    public static void serializarJson(ArrayList<? extends Producto> lista, String path) throws IOException {
 	String jsonString = gson.toJson(lista);
 	try (FileWriter out = new FileWriter(path)) {
 	    out.write(jsonString);
 	}
     }
 
-    public ArrayList<Producto> deserializarJson(String path) throws FileNotFoundException, IOException {
-	try (FileReader in = new FileReader("products.json")) {
+    public static ArrayList<Producto> deserializarJson(String path) throws FileNotFoundException, IOException {
+	try (FileReader in = new FileReader(path)) {
 	    Type productoType = new TypeToken<ArrayList<Producto>>() {
 	    }.getType();
 	    ArrayList<Producto> lista = gson.fromJson(in, productoType);
@@ -67,7 +67,7 @@ public class Serializadora {
 	}
     }
 
-    public void serializarCsv(ArrayList<? extends Producto> lista, String path) throws IOException {
+    public static void serializarCsv(ArrayList<? extends Producto> lista, String path) throws IOException {
 	try (BufferedWriter out = new BufferedWriter(new FileWriter(path)); CSVPrinter csvPrinter = new CSVPrinter(out, CSVFormat.DEFAULT.withHeader("Precio", "CantidadStock", "CantidadPedida", "TamanioPrendaSuperior", "TipoTela", "TamanioCalzado", "Marca", "Color", "TipoAccesorio"))) {
 	    for (Producto producto : lista) {
 		ArrayList<String> linea = new ArrayList<>();
@@ -100,7 +100,7 @@ public class Serializadora {
 	}
     }
 
-    public ArrayList<Producto> deserializarCSV(String path) throws FileNotFoundException, IOException {
+    public static ArrayList<Producto> deserializarCsv(String path) throws FileNotFoundException, IOException {
 	ArrayList<Producto> lista = new ArrayList<>();
 	try (BufferedReader in = new BufferedReader(new FileReader(path)); CSVParser csvParser = new CSVParser(in, CSVFormat.DEFAULT.withHeader())) {
 	    for (CSVRecord linea : csvParser) {
@@ -127,15 +127,19 @@ public class Serializadora {
 	return lista;
     }
     
-    public void exportarTxt(ArrayList<? extends Producto> lista, String path) throws IOException {
+    public static void exportarTxt(ArrayList<? extends Producto> lista, String path, String listaFiltrosString) throws IOException {
 	try (BufferedWriter out = new BufferedWriter(new FileWriter(path))){
 	    StringBuilder sb = new StringBuilder();
 	    sb.append("Lista de productos con Filtros aplicados\n\n");
 	    sb.append("Lista de Filtros:\n");
+	    sb.append(listaFiltrosString).append("\n");
 	    
+	    sb.append("Lista de Productos:\n");
 	    for (Producto producto : lista){
 		sb.append(producto.toString()).append("\n");
 	    }
+	    
+	    out.write(sb.toString());
 	}
     }
 }

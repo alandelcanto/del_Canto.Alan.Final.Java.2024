@@ -1,0 +1,8 @@
+Precio,CantidadStock,CantidadPedida,TamanioPrendaSuperior,TipoTela,TamanioCalzado,Marca,Color,TipoAccesorio
+950.0,20,30,M,LINO,,,,
+600.0,40,30,S,ALGODON,,,,
+500.0,10,20,,,40,ADIDAS,,
+900.0,15,20,,,43,CONVERSE,,
+500.0,10,20,,,,,Blanco,COLLAR
+900.0,15,20,,,,,Rojo,GORRA
+8687686.0,687543,8768767,,,,,gerger,CORBATA

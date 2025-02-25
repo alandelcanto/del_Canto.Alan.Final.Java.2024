@@ -27,10 +27,12 @@ public class SerializadorProductoJson implements JsonSerializer<Producto>{
 	    case PrendaSuperior prendaSuperior -> {
 		jsonObject.addProperty("tamanio", prendaSuperior.tamanio.name());
 		jsonObject.addProperty("tipoTela", prendaSuperior.tipoTela.name());
+		jsonObject.addProperty("TAMANIO_ORIGINAL_PRENDA_SUPERIOR", prendaSuperior.TAMANIO_ORIGINAL.name());
 	    }
 	    case Calzado calzado -> {
 		jsonObject.addProperty("tamanioCalzado", calzado.tamanio);
 		jsonObject.addProperty("marca", calzado.marca.name());
+		jsonObject.addProperty("TAMANIO_ORIGINAL_CALZADO", calzado.TAMANIO_ORIGINAL);
 	    }
 	    case Accesorio accesorio -> {
 		jsonObject.addProperty("color", accesorio.color);

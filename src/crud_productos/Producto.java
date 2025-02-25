@@ -54,6 +54,16 @@ public abstract class Producto implements Comparable<Producto>, Serializable{
     public int compareTo(Producto o) {
 	return Double.compare(this.precio, o.precio);
     }
+
+    @Override
+    public String toString() {
+	StringBuilder sb = new StringBuilder();
+	sb.append("Producto - ").append("Precio: ").append(precio)
+		.append(" - Stock: ").append(cantidadStock)
+		.append(" - Pedido: ").append(cantidadPedida);
+	
+	return sb.toString();
+    }
     
     
 }
