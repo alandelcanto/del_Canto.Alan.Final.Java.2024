@@ -1,0 +1,271 @@
+<diagram program="umletino" version="15.1"><zoom_level>6</zoom_level><element><id>UMLClass</id><coordinates><x>708</x><y>444</y><w>174</w><h>78</h></coordinates><panel_attributes>Accesorio
+-
++ color : String
++ tipo : TipoAccesorio
+-
++ Accesorio(double, int, int, String, TipoAccesorio)
++ Accesorio(double, int, int, String)
++ Accesorio(double, int, int)
+*+ toString() : String*</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>396</x><y>444</y><w>192</w><h>192</h></coordinates><panel_attributes>ActualizarObjetoControlador
+-
+- botonCancelar : Button
+- botonCrearObjeto: Button
+- elegirColor : TextField
+- elegirMarca : ComboBox&lt;Marca&gt;
+- elegirPedido : TextField
+- elegirPrecio: TextField
+- elegirProducto : ComboBox&lt;String&gt;
+- elegirStock: TextField
+- elegirTamanioCalzado : TextField
+- elegirTamanioPrendaSuperior : ComboBox&lt;Tamanio&gt;
+- elegirTela : ComboBox&lt;Tela&gt;
+- elegirTipo : ComboBox&lt;TipoAccesorio&gt;
+-
+- activarElecciones() : void
+- confirmarDialogo(boolean, Producto) : void
+- desactivarElecciones() : void
+- initialize() : void
+onBotonCancelar(ActionEvent) : void
+onBotonCrearObjeto(ActionEvent) : void
+onElegirProducto(ActionEvent) : void
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1020</x><y>702</y><w>72</w><h>42</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
+Ajustable
+-
+-
++ ajustar(int) : void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1002</x><y>594</y><w>120</w><h>42</h></coordinates><panel_attributes>AjusteImposibleException
+-
+-
+AjusteImposibleException()
+AjusteImposibleException(String)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>756</x><y>84</y><w>102</w><h>66</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
+CRUD&lt;T&gt;
+-
+-
++ crearObjeto(T) : void
++ leerLista() : ArrayList&lt;T&gt;
++ actualizarObjeto(T, T) : void
++ eliminarObjeto: void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>894</x><y>444</y><w>144</w><h>102</h></coordinates><panel_attributes>Calzado
+-
++ marca : Marca
++ tamanio : int
++ TAMANIO_ORIGINAL : int
+-
++ Calzado(double, int, int, Marca, int, int)
++ Calzado(double, int, int, Marca, int)
++ Calzado(double, int, int, Marca)
++ Calzado(double, int, int)
+*+ toString() : String*
+*+ ajustar(int) : void*</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>390</x><y>804</y><w>192</w><h>180</h></coordinates><panel_attributes>CrearObjetoControlador
+-
+- botonCancelar : Button
+- botonCrearObjeto: Button
+- elegirColor : TextField
+- elegirMarca : ComboBox&lt;Marca&gt;
+- elegirPedido : TextField
+- elegirPrecio: TextField
+- elegirProducto : ComboBox&lt;String&gt;
+- elegirStock: TextField
+- elegirTamanioCalzado : TextField
+- elegirTamanioPrendaSuperior : ComboBox&lt;Tamanio&gt;
+- elegirTela : ComboBox&lt;Tela&gt;
+- elegirTipo : ComboBox&lt;TipoAccesorio&gt;
+-
+- confirmarDialogo(boolean, Producto) : void
+- desactivarElecciones() : void
+- initialize() : void
+onBotonCancelar(ActionEvent) : void
+onBotonCrearObjeto(ActionEvent) : void
+onElegirProducto(ActionEvent) : void
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>480</x><y>120</y><w>222</w><h>30</h></coordinates><panel_attributes>DeserializadorProductoJson
+-
+-
+*+ deserialize(JsonElement, Type, JsonDeserializationContext)*</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>444</x><y>156</y><w>204</w><h>30</h></coordinates><panel_attributes>SerializadorProductoJson
+-
+-
+*+ serialize(Producto, Type, JsonDeserializationContext)*</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>930</x><y>48</y><w>186</w><h>120</h></coordinates><panel_attributes>Inventario&lt;T&gt;
+-
++ inventario : ArrayList&lt;T&gt;
++ posicion : int
+-
+*+ crearObjeto(T) : void*
+*+ leerLista() : ArrayList&lt;T&gt;*
+*+ actualizarObjeto(T, T) : void*
+*+ eliminarObjeto: void*
++ filtrar(ArrayList&lt;T&gt; , ArrayList&lt;Predicate&lt;? super T&gt;&gt;) : ArrayList&lt;T&gt;
+*+ forEach(Consumer&lt;? super T&gt;) : void*
+*+ hasNext() : boolean*
+*+ iterator() : Iterator&lt;T&gt;*
+*+ next() : T*</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>900</x><y>720</y><w>42</w><h>90</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
+Marca
+-
+ADIDAS
+CONVERSE
+CROCS
+NIKE
+PUMA
+REEBOK
+TOPPER</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1050</x><y>444</y><w>306</w><h>102</h></coordinates><panel_attributes>PrendaSuperior
+-
++ tipoTela: Tela
++ tamanio : TamanioPrendaSuperior
++ TAMANIO_ORIGINAL : TamanioPrendaSuperior
+-
++ PrendaSuperior(double, int, int, TamanioPrendaSuperior, Tela, TamanioPrendaSuperior)
++ PrendaSuperior(double, int, int, TamanioPrendaSuperior, Tela)
++ PrendaSuperior(double, int, int, TamanioPrendaSuperior)
++ PrendaSuperior(double, int, int)
+*+ toString() : String*
+*+ ajustar(int) : void*</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>972</x><y>300</y><w>108</w><h>102</h></coordinates><panel_attributes>/Producto/
+-
++ precio : double
++ cantidadStock : int
++ cantidadPedida : int
+-
++ Producto(double, int, int)
++ aceptarPedido(int) : boolean
++ realizarPedido(int) : void
++ realizarVenta(int) : double
+*+ compareTo(Producto) : int*
+*+ toString() : String*</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1194</x><y>300</y><w>138</w><h>30</h></coordinates><panel_attributes>ProductoPedidoComparator
+-
+-
+*+ compare(Producto, Producto) : int*</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1194</x><y>336</y><w>138</w><h>30</h></coordinates><panel_attributes>ProductoStockComparator
+-
+-
+*+ compare(Producto, Producto) : int*</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1194</x><y>378</y><w>138</w><h>42</h></coordinates><panel_attributes>ProductosInsuficientesException
+-
+-
+ProductosInsuficientesException()
+ProductosInsuficientesException(String)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>558</x><y>216</y><w>228</w><h>96</h></coordinates><panel_attributes>Serializadora
+-
+_+ gson : Gson_
+-
+_+ deserializar(String) : ArrayList&lt;Producto&gt;_
+_+ deserializarCsv(String) : ArrayList&lt;Producto&gt;_
+_+ deserializarJson(String) : ArrayList&lt;Producto&gt;_
+_+ exportarTxt(ArrayList&lt;? extends Producto&gt;, String, String) : void_
+_+ serializar(ArrayList&lt;? extends Producto&gt;, String) : void_
+_+ serializarCsv(ArrayList&lt;? extends Producto&gt;, String) : void_
+_+ serializarJson(ArrayList&lt;? extends Producto&gt;, String) : void_</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1260</x><y>630</y><w>90</w><h>78</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
+TamanioPrendaSuperior
+-
+XS
+S
+M
+L
+XL
+XXL
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1212</x><y>672</y><w>42</w><h>90</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
+Tela
+-
+ALGODON
+LANA
+LICRA
+LINO
+NYLON
+POLIESTER
+SEDA</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>762</x><y>768</y><w>60</w><h>114</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
+TipoAccesorio
+-
+RELOJ
+COLLAR
+CINTURON
+GORRA
+BUFANDA
+LENTES_DE_SOL
+BRAZALETE
+BOLSO
+GUANTE
+CORBATA</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>0</y><w>234</w><h>840</h></coordinates><panel_attributes>ControladorJFX
+-
+_+ inventario : Inventario&lt;Producto&gt;_
+_+ productoSeleccionado : Producto_
+_- listaFiltros : ArrayList&lt;Predicate&lt;? super Producto&gt;&gt;_
+_- listaFiltrosString : String_
+- listaFiltrada : ArrayList&lt;Producto&gt;
+- botonAceptarPedido : Button
+- botonActualizarObjeto : Button
+- botonAgregarObjeto : Button
+- botonAjustarProducto : Button
+- botonCargarCsv : Button
+- botonCargarDat : Button
+- botonCargarJson : Button
+- botonEliminarObjeto : Button
+- botonExportarTxt : Button
+- botonFuncionAumento : Button
+- botonFuncionDescuento : Button
+- botonGuardarCsv : Button
+- botonGuardarDat : Button
+- botonGuardarJson : Button
+- botonMantenerStock : Button
+- botonOrdenPedidoAsc : Button
+- botonOrdenPedidoDesc : Button
+- botonOrdenPrecioAsc : Button
+- botonOrdenPrecioDesc : Button
+- botonOrdenStockAsc : Button
+- botonOrdenStockDesc : Button
+- botonRealizarPedido : Button
+- botonRealizarVenta : Button
+- checkboxFiltroColor : CheckBox
+- checkboxFiltroMarca : CheckBox
+- checkboxFiltroPedidoMayor : CheckBox
+- checkboxFiltroPedidoMenor : CheckBox
+- checkboxFiltroPrecioMayor : CheckBox
+- checkboxFiltroPrecioMenor : CheckBox
+- checkboxFiltroStockMayor : CheckBox
+- checkboxFiltroStockMenor : CheckBox
+- checkboxFiltroTalla : CheckBox
+- checkboxFiltroTamanio : CheckBox
+- checkboxFiltroTela : CheckBox
+- checkboxFiltroTipoAccesorio : CheckBox
+- checkboxFiltroTipoObjeto : CheckBox
+- columnaColor : TableColumn&lt;Producto, String&gt;
+- columnaMarca : TableColumn&lt;Producto, String&gt;
+- columnaPedido : TableColumn&lt;Producto, Integer&gt;
+- columnaPrecio : TableColumn&lt;Producto, Double&gt;
+- columnaStock : TableColumn&lt;Producto, Integer&gt;
+- columnaTamañoCalzado : TableColumn&lt;Producto, Integer&gt;
+- columnaTamañoPrendaSuperior : TableColumn&lt;Producto, String&gt;
+- columnaTela : TableColumn&lt;Producto, String&gt;
+- columnaTipoAccesorio : TableColumn&lt;Producto, String&gt;
+- columnaTipoObjeto : TableColumn&lt;Producto, String&gt;
+- comboboxFiltroMarca : ComboBox&lt;Marca&gt;
+- comboboxFiltroTalla : ComboBox&lt;TamanioPrendaSuperior&gt;
+- comboboxFiltroTela : ComboBox&lt;Tela&gt;
+- comboboxFiltroTipoAccesorio : ComboBox&lt;TipoAccesorio&gt;
+- comboboxFiltroTipoObjeto : ComboBox&lt;String&gt;'
+- textfieldFiltroColor : TextField
+- textfieldFiltroPedido : TextField
+- textfieldFiltroPrecio : TextField
+- textfieldFiltroStock : TextField
+- textfieldFiltroTamanio : TextField
+-
+_+ mostrarAlerta(String, String) : void_
+_+ mostrarInfo(String, String) : void_
+_+ verificarIntPositivo(String) : boolean_
++ pedirIntProductoSeleccionado(String, String, int) : String
++ actualizarTabla() : void
+- initialize() : void
+aceptarPedido(ActionEvent) : void
+activarFiltros(ActionEvent) : void
+actualizarObjeto(ActionEvent) : void
+agregarObjeto(ActionEvent) : void
+ajustarProducto(ActionEvent) : void
+aumentarGlobal(ActionEvent) : void
+cargarArchivoCsv(ActionEvent) : void
+cargarArchivoDat(ActionEvent) : void
+cargarArchivoJson(ActionEvent) : void
+descuentoGlobal(ActionEvent) : void
+eliminarObjeto(ActionEvent) : void
+exportarArchivoTxt(ActionEvent) : void
+guardarArchivoCsv(ActionEvent) : void
+guardarArchivoDat(ActionEvent) : void
+guardarArchivoJson(ActionEvent) : void
+mantenerStock(ActionEvent) : void
+ordenarPedidoAsc(ActionEvent) : void
+ordenarPedidoDesc(ActionEvent) : void
+ordenarPrecioAsc(ActionEvent) : void
+ordenarPrecioDesc(ActionEvent) : void
+ordenarStockAsc(ActionEvent) : void
+ordenarStockDesc(ActionEvent) : void
+realizarPedido(ActionEvent) : void
+realizarVenta(ActionEvent) : void</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>798</x><y>384</y><w>186</w><h>72</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>290;10;10;100</additional_attributes></element><element><id>Relation</id><coordinates><x>960</x><y>396</y><w>72</w><h>60</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>100;10;10;80</additional_attributes></element><element><id>Relation</id><coordinates><x>1074</x><y>396</y><w>132</w><h>60</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;200;80</additional_attributes></element><element><id>Relation</id><coordinates><x>1074</x><y>306</y><w>132</w><h>18</h></coordinates><panel_attributes>lt=&lt;..</panel_attributes><additional_attributes>10;10;200;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1074</x><y>342</y><w>132</w><h>18</h></coordinates><panel_attributes>lt=&lt;..</panel_attributes><additional_attributes>10;10;200;10</additional_attributes></element><element><id>Relation</id><coordinates><x>954</x><y>540</y><w>84</w><h>174</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>120;270;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1080</x><y>540</y><w>138</w><h>174</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;270;210;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1074</x><y>372</y><w>132</w><h>42</h></coordinates><panel_attributes>lt=&lt;..</panel_attributes><additional_attributes>200;50;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1086</x><y>540</y><w>42</w><h>66</h></coordinates><panel_attributes>lt=&lt;..</panel_attributes><additional_attributes>10;90;50;10</additional_attributes></element><element><id>Relation</id><coordinates><x>990</x><y>540</y><w>54</w><h>66</h></coordinates><panel_attributes>lt=&lt;..</panel_attributes><additional_attributes>70;90;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>852</x><y>114</y><w>90</w><h>18</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;130;10</additional_attributes></element><element><id>Relation</id><coordinates><x>912</x><y>540</y><w>18</w><h>192</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>10;300;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>786</x><y>516</y><w>18</w><h>264</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>10;420;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1224</x><y>540</y><w>24</w><h>144</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>20;220;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1296</x><y>540</y><w>18</w><h>102</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>10;150;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>780</x><y>252</y><w>204</w><h>66</h></coordinates><panel_attributes>lt=&lt;..</panel_attributes><additional_attributes>320;90;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>558</x><y>180</y><w>66</w><h>48</h></coordinates><panel_attributes>lt=&lt;..</panel_attributes><additional_attributes>10;10;90;60</additional_attributes></element><element><id>Relation</id><coordinates><x>678</x><y>144</y><w>48</w><h>84</h></coordinates><panel_attributes>lt=&lt;..</panel_attributes><additional_attributes>10;10;60;120</additional_attributes></element><element><id>Relation</id><coordinates><x>576</x><y>828</y><w>198</w><h>30</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>310;10;10;30</additional_attributes></element><element><id>Relation</id><coordinates><x>576</x><y>744</y><w>336</w><h>102</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>540;10;210;30;10;150</additional_attributes></element><element><id>Relation</id><coordinates><x>576</x><y>684</y><w>648</w><h>150</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>1060;10;220;10;10;230</additional_attributes></element><element><id>Relation</id><coordinates><x>576</x><y>648</y><w>696</w><h>168</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>1140;10;210;50;10;260</additional_attributes></element><element><id>Relation</id><coordinates><x>564</x><y>366</y><w>420</w><h>450</h></coordinates><panel_attributes>lt=&lt;..</panel_attributes><additional_attributes>680;10;230;80;10;730</additional_attributes></element><element><id>Relation</id><coordinates><x>228</x><y>768</y><w>546</w><h>54</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>890;70;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>228</x><y>732</y><w>684</w><h>24</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>1120;10;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>228</x><y>672</y><w>996</w><h>54</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>1640;10;700;20;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>228</x><y>636</y><w>1044</w><h>72</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>1720;10;490;60;10;100</additional_attributes></element><element><id>Relation</id><coordinates><x>228</x><y>258</y><w>342</w><h>42</h></coordinates><panel_attributes>lt=&lt;..</panel_attributes><additional_attributes>550;10;10;50</additional_attributes></element><element><id>Relation</id><coordinates><x>228</x><y>36</y><w>714</w><h>42</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>1170;50;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>228</x><y>342</y><w>756</w><h>42</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>1240;10;10;50</additional_attributes></element><element><id>Relation</id><coordinates><x>582</x><y>594</y><w>192</w><h>198</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>300;310;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>582</x><y>582</y><w>330</w><h>162</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>530;250;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>582</x><y>564</y><w>642</w><h>120</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>1050;180;460;140;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>582</x><y>624</y><w>690</w><h>30</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>1130;20;590;30;10;10</additional_attributes></element></diagram>
