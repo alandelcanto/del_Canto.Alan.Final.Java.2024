@@ -9,20 +9,20 @@ La aplicación busca ser un sistema donde se podría manejar el stock y precio d
 ---
 
 #### La vista principal
-![](images/VistaPrincipal.png)
+![](images/VistaPrincipal.PNG)
 La vista principal es donde se encuentran la lista de productos y todos sus detalles, sin un límite de productos asignado.
 Siempre representa a la lista ya filtrada por los filtros seleccionados
 
 ---
 
 #### Acciones
-![](images/Acciones.png)
+![](images/Acciones.PNG)
 Aquí se encuentran todas las acciones con las que interactuar con los productos en el inventario, categorizados por su funcionamiento general.
 
 ---
 
 ##### Acciones de Comercio
-![](images/AccionesComercio.png)
+![](images/AccionesComercio.PNG)
 Son Acciones que se tomarían normalmente en un comercio.
 
 - Realizar Venta: Pide la cantidad de productos vendidos, y si es posible, te dice el valor total de la compra y te resta los productos vendidos del sistema.
@@ -33,7 +33,7 @@ Son Acciones que se tomarían normalmente en un comercio.
 ---
 
 ##### Acciones de CRUD
-![](images/AccionesCRUD.png)
+![](images/AccionesCRUD.PNG)
 Son Acciones para manipular a los productos.
 
 - Agregar Objeto: Pide los detalles del producto y lo añade al inventario.
@@ -43,7 +43,7 @@ Son Acciones para manipular a los productos.
 ---
 
 ##### Acciones de Ordenamiento
-![](images/AccionesOrdenamiento.png)
+![](images/AccionesOrdenamiento.PNG)
 Son Acciones para ordenar la lista de productos.
 
 - Precio: Ordena a los productos por precio de manera Ascendiente y Descendiente, respectivamente.
@@ -53,7 +53,7 @@ Son Acciones para ordenar la lista de productos.
 ---
 
 ##### Acciones de Filtrado
-![](images/AccionesFiltros.png)
+![](images/AccionesFiltros.PNG)
 Son Acciones para filtrar a la lista de productos.
 
 Cuando hay un valor válido y su respectiva casilla está activa, se puede considerar a ese filtro como activo.
@@ -63,7 +63,7 @@ Los filtros de Precio, Stock y Pedido, tienen dos casillas, una para valor menor
 ---
 
 ##### Acciones de Funcion
-![](images/AccionesFunciones.png)
+![](images/AccionesFunciones.PNG)
 Son Acciones para ejecutar ciertas funciones especiales.
 
 - Aumento / Descuento Global: Piden un porcentaje por el que deberían aumentarse o descontarse todos los productos de la lista.
@@ -72,7 +72,7 @@ Son Acciones para ejecutar ciertas funciones especiales.
 ---
 
 ##### Acciones de Archivos
-![](images/AccionesArchivos.png)
+![](images/AccionesArchivos.PNG)
 Son Acciones para guardar y cargar listas de productos en archivos de diferentes formatos.
 
 - Guardar Archivos: Guarda la lista general (Sin filtrar) en un archivo del formato seleccionado
