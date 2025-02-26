@@ -46,6 +46,7 @@ public class CrearObjetoControlador {
 
     @FXML
     private void initialize() {
+	// Rellenar los ComboBoxes con opciones
 	elegirProducto.getItems().setAll("PrendaSuperior", "Calzado", "Accesorio");
 	elegirTamanioPrendaSuperior.getItems().setAll(TamanioPrendaSuperior.values());
 	elegirTela.getItems().setAll(Tela.values());
@@ -55,6 +56,7 @@ public class CrearObjetoControlador {
     }
 
     private void desactivarElecciones() {
+	// Esconder todas las opciones específicas
 	elegirTamanioPrendaSuperior.setVisible(false);
 	elegirTela.setVisible(false);
 	elegirTamanioCalzado.setVisible(false);
@@ -64,6 +66,7 @@ public class CrearObjetoControlador {
     }
 
     private void confirmarDialogo(boolean exito, Producto objeto) {
+	// Si es un éxito se crea el objeto
 	if (exito) {
 	    ControladorJFX.inventario.crearObjeto(objeto);
 	}
@@ -93,10 +96,10 @@ public class CrearObjetoControlador {
 	    }
 
 	    switch (elegirProducto.getValue()) {
-		case "PrendaSuperior" -> {
+		case "PrendaSuperior" -> { // Verificaciones para que no crashee el programa
 		    TamanioPrendaSuperior tamanio = elegirTamanioPrendaSuperior.getValue();
 		    Tela tela = elegirTela.getValue();
-		    if (tamanio == null && tela == null) {
+		    if (tamanio == null && tela == null || tamanio == null) {
 			PrendaSuperior producto = new PrendaSuperior(precio, cantidadStock, cantidadPedida);
 			confirmarDialogo(true, producto);
 		    } else if (tela == null) {
@@ -115,7 +118,7 @@ public class CrearObjetoControlador {
 			return;
 		    }
 		    Marca marca = elegirMarca.getValue();
-		    if (marca == null) {
+		    if (marca == null) { // Verificaciones
 			Calzado producto = new Calzado(precio, cantidadStock, cantidadPedida);
 			confirmarDialogo(true, producto);
 		    } else {
@@ -126,7 +129,7 @@ public class CrearObjetoControlador {
 		case "Accesorio" -> {
 		    String color = elegirColor.getText();
 		    TipoAccesorio tipo = elegirTipo.getValue();
-		    if (tipo == null) {
+		    if (tipo == null) { // Verificaciones
 			Accesorio producto = new Accesorio(precio, cantidadStock, cantidadPedida, color);
 			confirmarDialogo(true, producto);
 		    } else {
@@ -146,7 +149,7 @@ public class CrearObjetoControlador {
 
     @FXML
     void onElegirProducto(ActionEvent event) {
-	switch (elegirProducto.getValue()) {
+	switch (elegirProducto.getValue()) { // Muestra las opciones de la clase especifica
 	    case "PrendaSuperior" -> {
 		desactivarElecciones();
 		elegirTamanioPrendaSuperior.setVisible(true);

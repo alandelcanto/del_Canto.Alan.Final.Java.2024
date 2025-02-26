@@ -19,7 +19,7 @@ public class Inventario<T> implements CRUD<T>, Iterable<T>, Iterator<T> {
     public int posicion;
 
     @Override
-    public void crearObjeto(T objeto) {
+    public void crearObjeto(T objeto) { // Todos los parámetros de estos métodos ya deberian estar verificados antes de llamarlos
 	this.inventario.add(objeto);
     }
 
@@ -29,7 +29,7 @@ public class Inventario<T> implements CRUD<T>, Iterable<T>, Iterator<T> {
     }
 
     @Override
-    public void actualizarObjeto(T objeto, T objetoActualizado) {
+    public void actualizarObjeto(T objeto, T objetoActualizado) { // Elimina el objeto viejo y reañade el ya actualizado
 	this.eliminarObjeto(objeto);
 	this.crearObjeto(objetoActualizado);
     }
@@ -68,6 +68,7 @@ public class Inventario<T> implements CRUD<T>, Iterable<T>, Iterator<T> {
 	if (listaFiltros.isEmpty()) {
 	    return lista;
 	} else {
+	    // Por cada filtro en la lista itera sobre ella ysi cumple con el filtro pasa a la siguiente lista
 	    ArrayList<T> listaFiltrada = new ArrayList<>();
 	    for (T objeto : lista) {
 		if (listaFiltros.get(0).test(objeto)){

@@ -42,7 +42,7 @@ public abstract class Producto implements Comparable<Producto>, Serializable{
     }
 
     public double realizarVenta(int cantidadAVender) throws ProductosInsuficientesException {
-	if (this.cantidadStock < cantidadAVender) {
+	if (this.cantidadStock < cantidadAVender) { // Verificar que los productos vendidos existen
 	    throw new ProductosInsuficientesException("No hay suficientes productos para realizar la venta");
 	} else {
 	    this.cantidadStock -= cantidadAVender;
@@ -51,7 +51,7 @@ public abstract class Producto implements Comparable<Producto>, Serializable{
     }
 
     @Override
-    public int compareTo(Producto o) {
+    public int compareTo(Producto o) { // Orden natural por Precio
 	return Double.compare(this.precio, o.precio);
     }
 

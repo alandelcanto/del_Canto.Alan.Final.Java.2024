@@ -231,6 +231,7 @@ public class ControladorJFX {
     private ArrayList<Producto> listaFiltrada = inventario.filtrar(inventario.leerLista(), listaFiltros);
 
     public void actualizarTabla() {
+	// Filtra la lista original y despues las muestra en la tabla
 	listaFiltrada = inventario.filtrar(inventario.leerLista(), new ArrayList<>(listaFiltros));
 	tablaObjetos.setItems(FXCollections.observableArrayList(listaFiltrada));
 	tablaObjetos.refresh();
@@ -243,7 +244,7 @@ public class ControladorJFX {
 	    return -1;
 	}
 
-	TextInputDialog dialogo = new TextInputDialog();
+	TextInputDialog dialogo = new TextInputDialog(); // Ventana que pide un Int
 	dialogo.setTitle("Ventana de ingreso de información");
 	dialogo.setHeaderText(headerAlerta);
 	dialogo.setContentText("Introduzca un número válido:");
@@ -252,7 +253,7 @@ public class ControladorJFX {
 
 	if (resultado.isPresent()) {
 	    try {
-		int valor = Integer.parseInt(resultado.get());
+		int valor = Integer.parseInt(resultado.get()); // Verifica que sea un int, y del signo apropiado para el modo
 		if (valor > 0 && modo == 1) {
 		    return valor;
 		} else if (modo == 0) {
@@ -272,7 +273,7 @@ public class ControladorJFX {
 
     @FXML
     private void initialize() {
-
+	// Configura las columnas con las variables de los objetos
 	columnaTipoObjeto.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getClass().getSimpleName()));
 	columnaPrecio.setCellValueFactory(cellData -> new javafx.beans.property.SimpleDoubleProperty(cellData.getValue().precio).asObject());
 	columnaStock.setCellValueFactory(cellData -> new javafx.beans.property.SimpleIntegerProperty(cellData.getValue().cantidadStock).asObject());
@@ -318,6 +319,7 @@ public class ControladorJFX {
 	    return new javafx.beans.property.SimpleStringProperty("-");
 	});
 
+	// Rellena los ComboBoxes de opciones
 	comboboxFiltroTipoObjeto.getItems().setAll("PrendaSuperior", "Calzado", "Accesorio");
 	comboboxFiltroTalla.getItems().setAll(TamanioPrendaSuperior.values());
 	comboboxFiltroTela.getItems().setAll(Tela.values());
@@ -328,7 +330,7 @@ public class ControladorJFX {
     }
 
     @FXML
-    void aceptarPedido(ActionEvent event) {
+    void aceptarPedido(ActionEvent event) { // Abre una ventana que pide un int y si confirma acepta el pedido
 	int valor = pedirIntProductoSeleccionado("Seleccione un producto para poder aceptar un pedido", "Ingrese un número de productos a recibir", 1);
 	if (valor != -1) {
 	    productoSeleccionado.aceptarPedido(valor);
@@ -338,7 +340,7 @@ public class ControladorJFX {
 
     @FXML
     void actualizarObjeto(ActionEvent event) {
-	try {
+	try { // Abre una ventana compleja para rellenar los datos del objeto seleccionado
 	    productoSeleccionado = tablaObjetos.getSelectionModel().getSelectedItem();
 
 	    FXMLLoader fxml = new FXMLLoader(getClass().getResource("ActualizarObjetoDialogo.fxml"));
@@ -358,7 +360,7 @@ public class ControladorJFX {
 
     @FXML
     void agregarObjeto(ActionEvent event) {
-	try {
+	try { // Abre una ventana compleja para crear un nuevo objeto
 	    FXMLLoader fxml = new FXMLLoader(getClass().getResource("CrearObjetoDialogo.fxml"));
 	    Scene escena = new Scene(fxml.load());
 
@@ -376,6 +378,7 @@ public class ControladorJFX {
 
     @FXML
     void ajustarProducto(ActionEvent event) {
+	// Pide un número e intenta ajustar el objeto seleccionado por el valor dado
 	productoSeleccionado = tablaObjetos.getSelectionModel().getSelectedItem();
 	if (productoSeleccionado instanceof Ajustable ajustable) {
 	    int valor = pedirIntProductoSeleccionado("Seleccione un producto para ajustar", "Ingrese el número de veces a ajustar el producto: (+) Agrandar producto, (-) Achicar producto", 0);
@@ -392,6 +395,7 @@ public class ControladorJFX {
 
     @FXML
     void aumentarGlobal(ActionEvent event) {
+	// Pide un porcentaje y aumenta el valor de todos los objetos
 	int valor = pedirIntProductoSeleccionado("Seleccione un producto para aumentar a todos", "Ingrese el porcentaje de aumento", 1);
 
 	if (valor != -1) {
@@ -412,6 +416,7 @@ public class ControladorJFX {
 
     @FXML
     void descuentoGlobal(ActionEvent event) {
+	// Pide un valor y descuenta a todos los objetos
 	int valor = pedirIntProductoSeleccionado("Seleccione un producto para descontar a todos", "Ingrese el porcentaje de descuento", 1);
 
 	if (valor > 100) {
@@ -436,6 +441,7 @@ public class ControladorJFX {
 
     @FXML
     void mantenerStock(ActionEvent event) {
+	// Mantiene el stock de todos los productos a un valor seleccionado
 	int valor = pedirIntProductoSeleccionado("Seleccione un producto para mantener a todos", "Ingrese el nivel a mantener: Si la cantidad es menor, se piden más", 1);
 
 	Consumer<Producto> consumer = (Producto producto) -> {
@@ -450,6 +456,9 @@ public class ControladorJFX {
 
     @FXML
     void activarFiltros(ActionEvent event) {
+	// Verifica qué filtros son válidos y están activos
+	// También arma un string con los filtros activos para exportar
+	
 	listaFiltrosString = "";
 	listaFiltros.clear();
 
@@ -526,7 +535,7 @@ public class ControladorJFX {
     }
 
     @FXML
-    void eliminarObjeto(ActionEvent event) {
+    void eliminarObjeto(ActionEvent event) { // Pide confirmación y borra un objeto
 	productoSeleccionado = tablaObjetos.getSelectionModel().getSelectedItem();
 	if (productoSeleccionado == null) {
 	    mostrarAlerta("No hay Producto seleccionado", "Seleccione un Producto para poder eliminarlo");
@@ -547,7 +556,7 @@ public class ControladorJFX {
     }
 
     @FXML
-    void realizarPedido(ActionEvent event) {
+    void realizarPedido(ActionEvent event) { // Pide un número para hacer un pedido
 	int valor = pedirIntProductoSeleccionado("Seleccione un producto para poder hacer un pedido", "Ingrese un número de productos a pedir", 1);
 	if (valor != -1) {
 	    productoSeleccionado.realizarPedido(valor);
@@ -556,7 +565,7 @@ public class ControladorJFX {
     }
 
     @FXML
-    void realizarVenta(ActionEvent event) {
+    void realizarVenta(ActionEvent event) { // Intenta vender la cantidad seleccionada del producto
 	int valor = pedirIntProductoSeleccionado("Seleccione un producto para poder hacer una venta", "Ingrese un número de productos a vender", 1);
 	if (valor != -1) {
 	    try {
@@ -607,7 +616,7 @@ public class ControladorJFX {
     }
 
     @FXML
-    void cargarArchivoCsv(ActionEvent event) {
+    void cargarArchivoCsv(ActionEvent event) { // Pide seleccionar un archivo a cargar, y le pasa el path a la Serializadora
 	FileChooser fc = new FileChooser();
 
 	FileChooser.ExtensionFilter csvFilter = new FileChooser.ExtensionFilter("Archivo CSV", "*.csv");
@@ -629,7 +638,7 @@ public class ControladorJFX {
     }
 
     @FXML
-    void cargarArchivoDat(ActionEvent event) {
+    void cargarArchivoDat(ActionEvent event) { // Pide seleccionar un archivo a cargar, y le pasa el path a la Serializadora
 	FileChooser fc = new FileChooser();
 
 	FileChooser.ExtensionFilter datFilter = new FileChooser.ExtensionFilter("Archivo de datos", "*.dat");
@@ -651,7 +660,7 @@ public class ControladorJFX {
     }
 
     @FXML
-    void cargarArchivoJson(ActionEvent event) {
+    void cargarArchivoJson(ActionEvent event) { // Pide seleccionar un archivo a cargar, y le pasa el path a la Serializadora
 	FileChooser fc = new FileChooser();
 
 	FileChooser.ExtensionFilter jsonFilter = new FileChooser.ExtensionFilter("Archivo JSON", "*.json");
@@ -673,7 +682,7 @@ public class ControladorJFX {
     }
 
     @FXML
-    void exportarArchivoTxt(ActionEvent event) {
+    void exportarArchivoTxt(ActionEvent event) { // Pide seleccionar un nombre para exportar, y le pasa el path a la Serializadora
 	FileChooser fc = new FileChooser();
 
 	FileChooser.ExtensionFilter txtFilter = new FileChooser.ExtensionFilter("Archivo de texto", "*.txt");
@@ -693,7 +702,7 @@ public class ControladorJFX {
     }
 
     @FXML
-    void guardarArchivoCsv(ActionEvent event) {
+    void guardarArchivoCsv(ActionEvent event) { // Pide seleccionar un nombre a guardar, y le pasa el path a la Serializadora
 	FileChooser fc = new FileChooser();
 
 	FileChooser.ExtensionFilter csvFilter = new FileChooser.ExtensionFilter("Archivo CSV", "*.csv");
@@ -713,7 +722,7 @@ public class ControladorJFX {
     }
 
     @FXML
-    void guardarArchivoDat(ActionEvent event) {
+    void guardarArchivoDat(ActionEvent event) { // Pide seleccionar un nombre a guardar, y le pasa el path a la Serializadora
 	FileChooser fc = new FileChooser();
 
 	FileChooser.ExtensionFilter datFilter = new FileChooser.ExtensionFilter("Archivo de datos", "*.dat");
@@ -733,7 +742,7 @@ public class ControladorJFX {
     }
 
     @FXML
-    void guardarArchivoJson(ActionEvent event) {
+    void guardarArchivoJson(ActionEvent event) { // Pide seleccionar un nombre a guardar, y le pasa el path a la Serializadora
 	FileChooser fc = new FileChooser();
 
 	FileChooser.ExtensionFilter jsonFilter = new FileChooser.ExtensionFilter("Archivo JSON", "*.json");

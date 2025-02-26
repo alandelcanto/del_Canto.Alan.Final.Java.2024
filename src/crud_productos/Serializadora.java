@@ -30,7 +30,7 @@ import org.apache.commons.csv.CSVRecord;
  */
 public class Serializadora {
 
-    public static Gson gson = new GsonBuilder()
+    public static Gson gson = new GsonBuilder() // Configurar el Gson
 	    .registerTypeAdapter(Producto.class, new SerializadorProductoJson())
 	    .registerTypeAdapter(Producto.class, new DeserializadorProductoJson())
 	    .setPrettyPrinting()
@@ -69,7 +69,7 @@ public class Serializadora {
 
     public static void serializarCsv(ArrayList<? extends Producto> lista, String path) throws IOException {
 	try (BufferedWriter out = new BufferedWriter(new FileWriter(path)); CSVPrinter csvPrinter = new CSVPrinter(out, CSVFormat.DEFAULT.withHeader("Precio", "CantidadStock", "CantidadPedida", "TamanioPrendaSuperior", "TipoTela", "TamanioCalzado", "Marca", "Color", "TipoAccesorio"))) {
-	    for (Producto producto : lista) {
+	    for (Producto producto : lista) { // Escribir cada producto en una línea, y dependiendo de que tipo es, leer de la variables o un espacio en blanco
 		ArrayList<String> linea = new ArrayList<>();
 		linea.add(Double.toString(producto.precio));
 		linea.add(Integer.toString(producto.cantidadStock));
@@ -108,15 +108,15 @@ public class Serializadora {
 		int cantidadStock = Integer.parseInt(linea.get("CantidadStock"));
 		int cantidadPedida = Integer.parseInt(linea.get("CantidadPedida"));
 
-		if (!"".equals(linea.get("TamanioPrendaSuperior"))) {
+		if (!"".equals(linea.get("TamanioPrendaSuperior"))) { // Si el el espacio designado no está en blanco, significa que es una PrendaSuperior
 		    TamanioPrendaSuperior tamanio = TamanioPrendaSuperior.valueOf(linea.get("TamanioPrendaSuperior"));
 		    Tela tipoTela = Tela.valueOf(linea.get("TipoTela"));
 		    lista.add(new PrendaSuperior(precio, cantidadStock, cantidadPedida, tamanio, tipoTela));
-		} else if (!"".equals(linea.get("TamanioCalzado"))) {
+		} else if (!"".equals(linea.get("TamanioCalzado"))) { // Lo mismo con Calzado
 		    int tamanio = Integer.parseInt(linea.get("TamanioCalzado"));
 		    Marca marca = Marca.valueOf(linea.get("Marca"));
 		    lista.add(new Calzado(precio, cantidadStock, cantidadPedida, marca, tamanio));
-		} else if (!"".equals(linea.get("Color"))) {
+		} else if (!"".equals(linea.get("Color"))) { // Lo mismo con Accesorio
 		    String color = linea.get("Color");
 		    TipoAccesorio tipo = TipoAccesorio.valueOf(linea.get("TipoAccesorio"));
 		    lista.add(new Accesorio(precio, cantidadStock, cantidadPedida, color, tipo));
@@ -132,7 +132,7 @@ public class Serializadora {
 	    StringBuilder sb = new StringBuilder();
 	    sb.append("Lista de productos con Filtros aplicados\n\n");
 	    sb.append("Lista de Filtros:\n");
-	    sb.append(listaFiltrosString).append("\n");
+	    sb.append(listaFiltrosString).append("\n"); // La lista ya con formato de los filtros
 	    
 	    sb.append("Lista de Productos:\n");
 	    for (Producto producto : lista){

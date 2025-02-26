@@ -37,7 +37,7 @@ public class PrendaSuperior extends Producto implements Ajustable{
 
     @Override
     public void ajustar(int ajuste) throws AjusteImposibleException {
-	int limiteAjuste = 1;
+	int limiteAjuste = 1; // Quiere decir que si es M, el límite es S-L
 	
 	if (this.tamanio.ordinal() + ajuste < 0 | this.tamanio.ordinal() + ajuste > TamanioPrendaSuperior.values().length) {
 	    // Verifica que no intente asignar un valor que no exista en el Enum
@@ -53,6 +53,7 @@ public class PrendaSuperior extends Producto implements Ajustable{
     @Override
     public String toString() {
 	StringBuilder sb = new StringBuilder();
+	// Sumar al toString() de Producto
 	sb.append(super.toString()).append(" - Tipo: ").append("Prenda Superior")
 		.append(" - Tamaño: ").append(tamanio)
 		.append(" - Tela: ").append(tipoTela);

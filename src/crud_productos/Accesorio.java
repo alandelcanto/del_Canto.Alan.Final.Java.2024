@@ -30,7 +30,8 @@ public class Accesorio extends Producto {
     @Override
     public String toString() {
 	StringBuilder sb = new StringBuilder();
-	sb.append(super.toString()).append(" - Tipo: ").append("Accesorio")
+	// Sumar al toString() de Producto
+	sb.append(super.toString()).append(" - Tipo: ").append("Accesorio") 
 		.append(" - Color: ").append(color)
 		.append(" - TipoAccesorio: ").append(tipo);
 	

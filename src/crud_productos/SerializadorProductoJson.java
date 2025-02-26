@@ -18,6 +18,7 @@ public class SerializadorProductoJson implements JsonSerializer<Producto>{
     
     @Override
     public JsonElement serialize(Producto t, Type type, JsonSerializationContext jsc) {
+	// Asigna los miembros del JsonObject dependiendo de las variables que tienen los objetos
 	JsonObject jsonObject = new JsonObject();
 	jsonObject.addProperty("precio", t.precio);
 	jsonObject.addProperty("cantidadStock", t.cantidadStock);
