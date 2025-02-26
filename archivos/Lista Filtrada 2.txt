@@ -1,0 +1,9 @@
+Lista de productos con Filtros aplicados
+
+Lista de Filtros:
+TipoObjeto = PrendaSuperior
+
+Lista de Productos:
+Producto - Precio: 4200.0 - Stock: 35 - Pedido: 0 - Tipo: Prenda Superior - Tamaño: L - Tela: LINO
+Producto - Precio: 12500.0 - Stock: 15 - Pedido: 20 - Tipo: Prenda Superior - Tamaño: M - Tela: ALGODON
+Producto - Precio: 45000.0 - Stock: 5 - Pedido: 10 - Tipo: Prenda Superior - Tamaño: S - Tela: SEDA

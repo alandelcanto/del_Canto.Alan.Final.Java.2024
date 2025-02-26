@@ -1,0 +1,7 @@
+Lista de productos con Filtros aplicados
+
+Lista de Filtros:
+TipoAccesorio = RELOJ
+
+Lista de Productos:
+Producto - Precio: 95000.0 - Stock: 5 - Pedido: 0 - Tipo: Accesorio - Color: Dorado - TipoAccesorio: RELOJ

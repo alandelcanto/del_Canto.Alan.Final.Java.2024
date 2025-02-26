@@ -1,0 +1,10 @@
+Lista de productos con Filtros aplicados
+
+Lista de Filtros:
+Stock > 10
+Pedido > 0
+
+Lista de Productos:
+Producto - Precio: 8000.0 - Stock: 15 - Pedido: 15 - Tipo: Accesorio - Color: Azul - TipoAccesorio: GORRA
+Producto - Precio: 12500.0 - Stock: 15 - Pedido: 20 - Tipo: Prenda Superior - Tamaño: M - Tela: ALGODON
+Producto - Precio: 35000.0 - Stock: 15 - Pedido: 5 - Tipo: Calzado - Tamaño: 42 - Marca: ADIDAS

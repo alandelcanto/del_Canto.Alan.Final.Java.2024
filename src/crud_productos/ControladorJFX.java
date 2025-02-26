@@ -71,7 +71,7 @@ public class ControladorJFX {
 
     @FXML
     private Button botonEliminarObjeto;
-    
+
     @FXML
     private Button botonCargarCsv;
 
@@ -92,7 +92,7 @@ public class ControladorJFX {
 
     @FXML
     private Button botonGuardarJson;
-    
+
     @FXML
     private Button botonFuncionAumento;
 
@@ -272,7 +272,7 @@ public class ControladorJFX {
 
     @FXML
     private void initialize() {
-	
+
 	columnaTipoObjeto.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getClass().getSimpleName()));
 	columnaPrecio.setCellValueFactory(cellData -> new javafx.beans.property.SimpleDoubleProperty(cellData.getValue().precio).asObject());
 	columnaStock.setCellValueFactory(cellData -> new javafx.beans.property.SimpleIntegerProperty(cellData.getValue().cantidadStock).asObject());
@@ -394,17 +394,20 @@ public class ControladorJFX {
     void aumentarGlobal(ActionEvent event) {
 	int valor = pedirIntProductoSeleccionado("Seleccione un producto para aumentar a todos", "Ingrese el porcentaje de aumento", 1);
 
-	Consumer<Producto> consumer = (Producto producto) -> {
-	    double precioAumentado = producto.precio * (1 + (valor / 100.0));
+	if (valor != -1) {
 
-	    BigDecimal precioRedondeado = new BigDecimal(precioAumentado).setScale(2, RoundingMode.HALF_UP);
+	    Consumer<Producto> consumer = (Producto producto) -> {
+		double precioAumentado = producto.precio * (1 + (valor / 100.0));
 
-	    producto.precio = precioRedondeado.doubleValue();
+		BigDecimal precioRedondeado = new BigDecimal(precioAumentado).setScale(2, RoundingMode.HALF_UP);
 
-	};
+		producto.precio = precioRedondeado.doubleValue();
 
-	inventario.forEach(consumer);
-	actualizarTabla();
+	    };
+
+	    inventario.forEach(consumer);
+	    actualizarTabla();
+	}
     }
 
     @FXML
@@ -416,17 +419,19 @@ public class ControladorJFX {
 	    return;
 	}
 
-	Consumer<Producto> consumer = (Producto producto) -> {
-	    double precioAumentado = producto.precio * (1 - (valor / 100.0));
+	if (valor != -1) {
+	    Consumer<Producto> consumer = (Producto producto) -> {
+		double precioAumentado = producto.precio * (1 - (valor / 100.0));
 
-	    BigDecimal precioRedondeado = new BigDecimal(precioAumentado).setScale(2, RoundingMode.HALF_UP);
+		BigDecimal precioRedondeado = new BigDecimal(precioAumentado).setScale(2, RoundingMode.HALF_UP);
 
-	    producto.precio = precioRedondeado.doubleValue();
+		producto.precio = precioRedondeado.doubleValue();
 
-	};
+	    };
 
-	inventario.forEach(consumer);
-	actualizarTabla();
+	    inventario.forEach(consumer);
+	    actualizarTabla();
+	}
     }
 
     @FXML
@@ -447,9 +452,9 @@ public class ControladorJFX {
     void activarFiltros(ActionEvent event) {
 	listaFiltrosString = "";
 	listaFiltros.clear();
-	
+
 	StringBuilder sb = new StringBuilder();
-	
+
 	if (checkboxFiltroTipoObjeto.isSelected() && comboboxFiltroTipoObjeto.getValue() != null) {
 	    Predicate<Producto> filtroTipoObjeto = (objeto) -> objeto.getClass().getName().replace("crud_productos.", "").equals(comboboxFiltroTipoObjeto.getValue());
 	    listaFiltros.add(filtroTipoObjeto);
@@ -600,87 +605,86 @@ public class ControladorJFX {
 	Collections.sort(inventario.leerLista(), Collections.reverseOrder(new ProductoStockComparator()));
 	actualizarTabla();
     }
-    
+
     @FXML
     void cargarArchivoCsv(ActionEvent event) {
 	FileChooser fc = new FileChooser();
-	
+
 	FileChooser.ExtensionFilter csvFilter = new FileChooser.ExtensionFilter("Archivo CSV", "*.csv");
-	
+
 	fc.getExtensionFilters().add(csvFilter);
-	
+
 	File archivo = fc.showOpenDialog(botonCargarCsv.getScene().getWindow());
 	if (archivo == null) {
 	    return;
 	}
-	
+
 	try {
 	    inventario.inventario = Serializadora.deserializarCsv(archivo.getAbsolutePath());
 	} catch (IOException ex) {
 	    mostrarAlerta("Error al cargar archivo", "No se pudo cargar correctamente el archivo");
 	}
-	
+
 	actualizarTabla();
     }
 
     @FXML
     void cargarArchivoDat(ActionEvent event) {
 	FileChooser fc = new FileChooser();
-	
+
 	FileChooser.ExtensionFilter datFilter = new FileChooser.ExtensionFilter("Archivo de datos", "*.dat");
-	
+
 	fc.getExtensionFilters().add(datFilter);
-	
+
 	File archivo = fc.showOpenDialog(botonCargarDat.getScene().getWindow());
 	if (archivo == null) {
 	    return;
 	}
-	
+
 	try {
 	    inventario.inventario = Serializadora.deserializar(archivo.getAbsolutePath());
 	} catch (IOException | ClassNotFoundException ex) {
 	    mostrarAlerta("Error al cargar archivo", "No se pudo cargar correctamente el archivo");
 	}
-	
+
 	actualizarTabla();
     }
 
     @FXML
     void cargarArchivoJson(ActionEvent event) {
 	FileChooser fc = new FileChooser();
-	
+
 	FileChooser.ExtensionFilter jsonFilter = new FileChooser.ExtensionFilter("Archivo JSON", "*.json");
-	
+
 	fc.getExtensionFilters().add(jsonFilter);
-	
+
 	File archivo = fc.showOpenDialog(botonCargarJson.getScene().getWindow());
 	if (archivo == null) {
 	    return;
 	}
-	
+
 	try {
 	    inventario.inventario = Serializadora.deserializarJson(archivo.getAbsolutePath());
 	} catch (IOException ex) {
 	    mostrarAlerta("Error al cargar archivo", "No se pudo cargar correctamente el archivo");
 	}
-	
+
 	actualizarTabla();
     }
-    
+
     @FXML
     void exportarArchivoTxt(ActionEvent event) {
 	FileChooser fc = new FileChooser();
-	
+
 	FileChooser.ExtensionFilter txtFilter = new FileChooser.ExtensionFilter("Archivo de texto", "*.txt");
-	
+
 	fc.getExtensionFilters().add(txtFilter);
-	
+
 	File archivo = fc.showSaveDialog(botonExportarTxt.getScene().getWindow());
 	if (archivo == null) {
 	    return;
 	}
-	
-	
+
 	try {
 	    Serializadora.exportarTxt(listaFiltrada, archivo.getAbsolutePath(), listaFiltrosString);
 	} catch (IOException ex) {
@@ -691,16 +695,16 @@ public class ControladorJFX {
     @FXML
     void guardarArchivoCsv(ActionEvent event) {
 	FileChooser fc = new FileChooser();
-	
+
 	FileChooser.ExtensionFilter csvFilter = new FileChooser.ExtensionFilter("Archivo CSV", "*.csv");
-	
+
 	fc.getExtensionFilters().add(csvFilter);
-	
+
 	File archivo = fc.showSaveDialog(botonGuardarCsv.getScene().getWindow());
 	if (archivo == null) {
 	    return;
 	}
-	
+
 	try {
 	    Serializadora.serializarCsv(inventario.leerLista(), archivo.getAbsolutePath());
 	} catch (IOException ex) {
@@ -711,16 +715,16 @@ public class ControladorJFX {
     @FXML
     void guardarArchivoDat(ActionEvent event) {
 	FileChooser fc = new FileChooser();
-	
+
 	FileChooser.ExtensionFilter datFilter = new FileChooser.ExtensionFilter("Archivo de datos", "*.dat");
-	
+
 	fc.getExtensionFilters().add(datFilter);
-	
+
 	File archivo = fc.showSaveDialog(botonGuardarDat.getScene().getWindow());
 	if (archivo == null) {
 	    return;
 	}
-	
+
 	try {
 	    Serializadora.serializar(inventario.leerLista(), archivo.getAbsolutePath());
 	} catch (IOException ex) {
@@ -731,16 +735,16 @@ public class ControladorJFX {
     @FXML
     void guardarArchivoJson(ActionEvent event) {
 	FileChooser fc = new FileChooser();
-	
+
 	FileChooser.ExtensionFilter jsonFilter = new FileChooser.ExtensionFilter("Archivo JSON", "*.json");
-	
+
 	fc.getExtensionFilters().add(jsonFilter);
-	
+
 	File archivo = fc.showSaveDialog(botonGuardarJson.getScene().getWindow());
 	if (archivo == null) {
 	    return;
 	}
-	
+
 	try {
 	    Serializadora.serializarJson(inventario.leerLista(), archivo.getAbsolutePath());
 	} catch (IOException ex) {

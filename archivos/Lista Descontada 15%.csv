@@ -1,0 +1,9 @@
+Precio,CantidadStock,CantidadPedida,TamanioPrendaSuperior,TipoTela,TamanioCalzado,Marca,Color,TipoAccesorio
+3570.0,35,0,L,LINO,,,,
+38250.0,5,10,S,SEDA,,,,
+10625.0,15,20,M,ALGODON,,,,
+29750.0,15,5,,,42,ADIDAS,,
+18700.0,10,15,,,39,CONVERSE,,
+6375.0,20,0,,,,,Negro,LENTES_DE_SOL
+80750.0,5,0,,,,,Dorado,RELOJ
+6800.0,15,15,,,,,Azul,GORRA

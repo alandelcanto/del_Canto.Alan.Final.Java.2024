@@ -1,0 +1,63 @@
+[
+  {
+    "tamanio": "L",
+    "tipoTela": "LINO",
+    "TAMANIO_ORIGINAL": "L",
+    "precio": 3570.0,
+    "cantidadStock": 35,
+    "cantidadPedida": 0
+  },
+  {
+    "tamanio": "S",
+    "tipoTela": "SEDA",
+    "TAMANIO_ORIGINAL": "S",
+    "precio": 38250.0,
+    "cantidadStock": 5,
+    "cantidadPedida": 10
+  },
+  {
+    "tamanio": "M",
+    "tipoTela": "ALGODON",
+    "TAMANIO_ORIGINAL": "M",
+    "precio": 10625.0,
+    "cantidadStock": 15,
+    "cantidadPedida": 20
+  },
+  {
+    "marca": "ADIDAS",
+    "tamanio": 42,
+    "TAMANIO_ORIGINAL": 42,
+    "precio": 29750.0,
+    "cantidadStock": 15,
+    "cantidadPedida": 5
+  },
+  {
+    "marca": "CONVERSE",
+    "tamanio": 39,
+    "TAMANIO_ORIGINAL": 39,
+    "precio": 18700.0,
+    "cantidadStock": 10,
+    "cantidadPedida": 15
+  },
+  {
+    "color": "Negro",
+    "tipo": "LENTES_DE_SOL",
+    "precio": 6375.0,
+    "cantidadStock": 20,
+    "cantidadPedida": 0
+  },
+  {
+    "color": "Dorado",
+    "tipo": "RELOJ",
+    "precio": 80750.0,
+    "cantidadStock": 5,
+    "cantidadPedida": 0
+  },
+  {
+    "color": "Azul",
+    "tipo": "GORRA",
+    "precio": 6800.0,
+    "cantidadStock": 15,
+    "cantidadPedida": 15
+  }
+]
